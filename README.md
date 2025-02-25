@@ -68,7 +68,5 @@ Exiting...
 - **Language:** C++
 - **Compiler:** g++ / MinGW
 
-## Author
 
-Developed by [Your Name].
 
