@@ -1,0 +1,96 @@
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+// Structure to store student details
+struct Student {
+    int rollNumber;
+    string name;
+    float marks;
+};
+
+// Function to calculate grade
+char calculateGrade(float marks) {
+    if (marks >= 90) return 'A';
+    else if (marks >= 75) return 'B';
+    else if (marks >= 60) return 'C';
+    else if (marks >= 40) return 'D';
+    else return 'F';
+}
+
+// Function to add a student
+void addStudent(vector<Student> &students) {
+    Student s;
+    cout << "Enter Roll Number: ";
+    cin >> s.rollNumber;
+    cin.ignore();
+    cout << "Enter Name: ";
+    getline(cin, s.name);
+    cout << "Enter Marks: ";
+    cin >> s.marks;
+    
+    students.push_back(s);
+    cout << "Student added successfully!\n";
+}
+
+// Function to display all students
+void displayStudents(const vector<Student> &students) {
+    if (students.empty()) {
+        cout << "No students available!\n";
+        return;
+    }
+
+    cout << "\nStudent Details:\n";
+    for (const auto &s : students) {
+        cout << "Roll No: " << s.rollNumber
+             << ", Name: " << s.name
+             << ", Marks: " << s.marks
+             << ", Grade: " << calculateGrade(s.marks) << endl;
+    }
+}
+
+// Function to search for a student by roll number
+void searchStudent(const vector<Student> &students, int rollNo) {
+    for (const auto &s : students) {
+        if (s.rollNumber == rollNo) {
+            cout << "Student Found:\n";
+            cout << "Roll No: " << s.rollNumber
+                 << ", Name: " << s.name
+                 << ", Marks: " << s.marks
+                 << ", Grade: " << calculateGrade(s.marks) << endl;
+            return;
+        }
+    }
+    cout << "Student not found!\n";
+}
+
+int main() {
+    vector<Student> students;
+    int choice, rollNo;
+
+    do {
+        cout << "\nStudent Management System\n";
+        cout << "1. Add Student\n";
+        cout << "2. Display Students\n";
+        cout << "3. Search Student\n";
+        cout << "4. Exit\n";
+        cout << "Enter your choice: ";
+        cin >> choice;
+
+        switch (choice) {
+            case 1: addStudent(students); break;
+            case 2: displayStudents(students); break;
+            case 3: 
+                cout << "Enter Roll Number to Search: ";
+                cin >> rollNo;
+                searchStudent(students, rollNo);
+                break;
+            case 4: cout << "Exiting...\n"; break;
+            default: cout << "Invalid choice! Try again.\n";
+        }
+    } while (choice != 4);
+
+    return 0;
+}
+
